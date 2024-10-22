@@ -5,11 +5,13 @@ function OrderItem({ item, isLoadingIngredients, ingredients }) {
 
   return (
     <li>
-      <div>
+      <div className="flex justify-between gap-8">
         <p>
           <span>{quantity}&times;</span> {name}
         </p>
-        <p>{formatCurrency(totalPrice)}</p>
+        <p className="font-semibold text-green-800">
+          {formatCurrency(totalPrice)}
+        </p>
       </div>
     </li>
   );
