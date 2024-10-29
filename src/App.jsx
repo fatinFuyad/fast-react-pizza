@@ -19,7 +19,7 @@ const router = createBrowserRouter([
       {
         path: "/menu",
         element: <Menu />,
-        errorElement: <PageNotFound />,
+        errorElement: <Error />,
         loader: menuLoader,
       },
       { path: "/cart", element: <Cart /> },

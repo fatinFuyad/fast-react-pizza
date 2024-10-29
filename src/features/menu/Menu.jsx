@@ -5,9 +5,8 @@ import MenuItem from "./MenuItem";
 function Menu() {
   // we don't need to specify the loader that useLoaderData hook will call and return data from. It will use the loader associated with the route.
   const menu = useLoaderData();
-  console.log(menu);
   return (
-    <ul className="gap-4p-6 grid lg:grid-cols-2 lg:gap-x-16">
+    <ul className="grid gap-4 p-6 lg:grid-cols-2 lg:gap-x-16">
       {menu.map((pizza) => (
         <MenuItem key={pizza.id} pizza={pizza} />
       ))}

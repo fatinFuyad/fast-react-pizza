@@ -17,7 +17,7 @@ function SearchOrder() {
     >
       <input
         id="search-input"
-        className="w-full rounded-full px-4 py-1.5 text-center transition-all duration-300 placeholder:text-stone-400 focus:outline-none focus:ring-4 focus:ring-orange-300 focus:ring-opacity-50 sm:px-10 sm:focus:scale-x-110"
+        className="w-full rounded-full px-4 py-1.5 text-center transition-all duration-300 placeholder:text-stone-400 focus:outline-none focus:ring-4 focus:ring-orange-600 focus:ring-opacity-50 sm:px-10 sm:focus:scale-x-110"
         placeholder="Search oder #"
         type="text"
         value={query}

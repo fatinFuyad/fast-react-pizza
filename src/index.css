@@ -14,6 +14,35 @@
   }
 }
 
+body {
+  overflow: hidden;
+}
+
+.cart-overview {
+  /* Hide and show Cart overview */
+  /* Allows NO transitions at all */
+  /* display: none; */
+
+  /* 1) Hide it visually */
+  opacity: 0;
+
+  /* 2) Make it unaccessible to mouse and keyboard */
+  pointer-events: none;
+
+  /* 3) Hide it from screen readers */
+  visibility: hidden;
+  transform: translateY(4rem);
+  transition: 0.5s ease-out;
+  transition-property: transform opacity;
+}
+
+.cart-overview.visible {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+  transform: translateY(0);
+}
+
 /* https://dev.to/afif/i-made-100-css-loaders-for-your-next-project-4eje */
 .loader {
   width: 45px;

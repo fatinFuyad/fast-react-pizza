@@ -1,5 +1,3 @@
-// Test ID: IIDSAT
-
 import { useLoaderData } from "react-router-dom";
 import { getOrder } from "../../services/apiRestaurant";
 import {
@@ -8,9 +6,12 @@ import {
   formatDate,
 } from "../../utils/helpers";
 import OrderItem from "./OrderItem";
+import store from "../../store";
+import { clearCart } from "../cart/cartSlice";
 
 // Everyone can search for all orders, so for privacy reasons we're gonna exclude names or address, these are only for the restaurant staff
 
+// Test ID: IIDSAT
 function Order() {
   const order = useLoaderData();
   const {
@@ -29,13 +30,13 @@ function Order() {
       <div className="flex flex-wrap justify-between gap-x-6 gap-y-4">
         <h2 className="text-xl font-medium">Order #IIDSAT Status</h2>
 
-        <div className="flex gap-4 text-lg uppercase text-white">
+        <div className="flex flex-wrap gap-4 text-lg uppercase text-white">
           {priority && (
-            <span className="flex items-center rounded-full bg-red-600 px-4 py-0.5">
+            <span className="flex items-center rounded-full bg-red-500 px-4 py-0.5">
               Priority
             </span>
           )}
-          <span className="flex items-center rounded-full bg-green-700 px-4 py-0.5">
+          <span className="flex items-center rounded-full bg-green-500 px-4 py-0.5">
             {status} order
           </span>
         </div>
@@ -53,13 +54,18 @@ function Order() {
       </div>
       <ul className="grid gap-4 divide-y divide-stone-500">
         {cart.map((item) => {
-          return <OrderItem key={item.id} item={item} />;
+          return <OrderItem key={item.pizzaId} item={item} />;
         })}
       </ul>
-      <div className="flex flex-col gap-2 bg-orange-200/80 px-4 py-4 font-medium text-stone-800">
+      <div className="flex flex-col gap-2 bg-red-100 px-4 py-4 font-medium text-stone-800">
         <p>Price pizza: {formatCurrency(orderPrice)}</p>
         {priority && <p>Price priority: {formatCurrency(priorityPrice)}</p>}
-        <p>To pay on delivery: {formatCurrency(orderPrice + priorityPrice)}</p>
+        <p className="text-xl font-semibold">
+          To pay on delivery:{" "}
+          <span className="text-green-800">
+            {formatCurrency(orderPrice + priorityPrice)}
+          </span>
+        </p>
       </div>
     </div>
   );
@@ -69,6 +75,8 @@ function Order() {
 // The useParams hook can only be used inside a component but not in a regular function. we can't use useParams hook inside loader. But the loader will have the access the params as a parameter, where the orderId is a property of params.
 export async function loader({ params }) {
   const order = await getOrder(params.orderId);
+  // Not recommended. This could cause performance issues.
+  store.dispatch(clearCart());
   return order;
 }
 
