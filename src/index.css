@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Playwrite+GB+S:ital,wght@0,100..400;1,100..400&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -10,12 +12,16 @@
     @apply focus:outline-none focus:ring-2 focus:ring-yellow-300;
   }
   .input {
-    @apply grow rounded-full bg-gray-200/60 px-4 py-1 hover:ring-2 hover:ring-yellow-300 focus:outline-none focus:ring-2 focus:ring-yellow-300;
+    @apply grow rounded-full bg-gray-200/60 px-4 py-2 hover:ring-2 hover:ring-yellow-300 focus:outline-none focus:ring-2 focus:ring-yellow-300;
   }
 }
 
 body {
   overflow: hidden;
+}
+
+.pizza-name {
+  font-family: Playwrite GB S;
 }
 
 .cart-overview {

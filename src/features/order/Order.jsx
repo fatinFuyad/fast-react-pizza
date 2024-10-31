@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom";
+import { useFetcher, useLoaderData } from "react-router-dom";
 import { getOrder } from "../../services/apiRestaurant";
 import {
   calcMinutesLeft,
@@ -8,12 +8,24 @@ import {
 import OrderItem from "./OrderItem";
 import store from "../../store";
 import { clearCart } from "../cart/cartSlice";
+import { useEffect } from "react";
+import UpdateOrder from "./UpdateOrder";
 
 // Everyone can search for all orders, so for privacy reasons we're gonna exclude names or address, these are only for the restaurant staff
 
-// Test ID: IIDSAT
+// Test ID: IIDSAT, W6PNSQ
 function Order() {
   const order = useLoaderData();
+  const fetcher = useFetcher();
+  useEffect(
+    function () {
+      if (!fetcher.data && fetcher.state === "idle") fetcher.load("/menu");
+    },
+    [fetcher],
+  );
+  // console.log(fetcher);
+  // console.log(fetcher.data);
+
   const {
     id,
     status,
@@ -28,7 +40,7 @@ function Order() {
   return (
     <div className="mt-6 grid gap-8 p-6">
       <div className="flex flex-wrap justify-between gap-x-6 gap-y-4">
-        <h2 className="text-xl font-medium">Order #IIDSAT Status</h2>
+        <h2 className="text-xl font-medium">Order status: {id} </h2>
 
         <div className="flex flex-wrap gap-4 text-lg uppercase text-white">
           {priority && (
@@ -54,7 +66,17 @@ function Order() {
       </div>
       <ul className="grid gap-4 divide-y divide-stone-500">
         {cart.map((item) => {
-          return <OrderItem key={item.pizzaId} item={item} />;
+          return (
+            <OrderItem
+              key={item.pizzaId}
+              item={item}
+              isLoadingIngredients={fetcher.state === "loading"}
+              ingredients={
+                fetcher.data?.find((el) => el.id === item.pizzaId).ingredients
+                // data might not be available at while loading, so checking it necessary
+              }
+            />
+          );
         })}
       </ul>
       <div className="flex flex-col gap-2 bg-red-100 px-4 py-4 font-medium text-stone-800">
@@ -67,6 +89,11 @@ function Order() {
           </span>
         </p>
       </div>
+      {!priority && (
+        <div className="text-right">
+          <UpdateOrder />
+        </div>
+      )}
     </div>
   );
 }

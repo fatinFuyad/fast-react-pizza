@@ -34,8 +34,10 @@ function MenuItem({ pizza }) {
         alt={name}
       />
       <div className="flex w-full flex-col gap-2 py-4">
-        <p className="text-lg font-medium text-stone-700">{name}</p>
-        <p className="text-sm capitalize">{ingredients.join(", ")}</p>
+        <p className="pizza-name text-lg font-medium text-stone-900">{name}</p>
+        <p className="ingredients text-sm capitalize">
+          {ingredients.join(", ")}
+        </p>
         <div className="mt-auto flex items-center justify-between gap-4 max-[448px]:flex-col max-[448px]:items-start">
           {!soldOut ? <p>{formatCurrency(unitPrice)}</p> : <p>Sold out</p>}
 

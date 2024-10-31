@@ -9,8 +9,8 @@ function CartItem({ item }) {
 
   return (
     <li className="flex flex-wrap justify-between gap-x-8 gap-y-2">
-      <p className="basis-40">
-        {quantity}&times; {name}
+      <p className="pizza-name basis-40">
+        {quantity} &times; {name}
       </p>
       <div className="flex items-center justify-between gap-5 sm:w-auto">
         <p className="font-semibold text-green-700">
