@@ -30,31 +30,23 @@ Unique Order ID: Every order gets a unique ID, so you can easily look up your or
 
 Homepage: /
 
-Pizza Menu /menu
+Pizza Menu: /menu
 
-Cart: /cart
+Cart: /cart 
+Placing a new order: /order/new 
+Looking up an order: /order/:orderID 
 
-Placing a new order: /order/new
-
-Looking up an order: /order/:orderID
-
-State Management
-
-User: Global UI state (No accounts)
-
-Menu: Global remote state (Menu fetched from API)
-
-Cart: Global UI state
-
+State Management 
+User: Global UI state (No accounts) 
+Menu: Global remote state (Menu fetched from API) 
+Cart: Global UI state 
 Order: Global remote state (Fetched and submitted to API)
 
 
-Technologies used
+Technologies used 
 
-Routing: React Router
-
-Styling: TailwindCSS
-
+Routing: React Router 
+Styling: TailwindCSS 
 Persist Remote State Management: React Router
 
 UI State Management: Redux Toolkit
